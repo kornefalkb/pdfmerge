@@ -75,6 +75,9 @@ public class Selection extends JPanel {
 				File saveFile = getSaveAsFile();
 				if (saveFile == null)
 					return;
+				if (!saveFile.getName().toLowerCase().endsWith(".pdf")) {
+					saveFile = new File(saveFile.getAbsolutePath()+".pdf");
+				}
 				PDFmerge merge = new PDFmerge();
 	    		merge.pdfFiles(saveFile, fileList);
 			}
@@ -127,6 +130,8 @@ public class Selection extends JPanel {
 		fc.addChoosableFileFilter(new FileNameExtensionFilter("PDF files", "pdf"));
 		fc.setFileFilter(filter);
 		fc.setDialogTitle("Select direcorty to merge PDF files");
+		fc.setFileView(new PDFFileView());
+		fc.setAccessory(new PDFFilePreview(fc));
 		if (fc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
 			return fc.getSelectedFiles();
 		}

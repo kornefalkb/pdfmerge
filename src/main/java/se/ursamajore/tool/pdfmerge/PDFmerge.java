@@ -11,13 +11,13 @@ import java.util.ArrayList;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 
-public class PDFmerge {
+class PDFmerge {
 
-	PDDocument document = null;
-	int nrPDF=0;
-	List<PDDocument> pdfFiles = new ArrayList<PDDocument>();
-	StringBuilder sb = new StringBuilder();
-	public void pdfFiles(File saveFile, List<File> listOfFiles) {
+	private PDDocument document = null;
+	private int nrPDF=0;
+	private List<PDDocument> pdfFiles = new ArrayList<>();
+	private StringBuilder sb = new StringBuilder();
+	void pdfFiles(File saveFile, List<File> listOfFiles) {
 		for (File file : listOfFiles) {
 			String name = file.getName();
 			if (name.substring(name.length()-3).toLowerCase().equals("pdf")) {
@@ -31,7 +31,12 @@ public class PDFmerge {
 		if (document != null) {
 			try {
 				if (document.getNumberOfPages() > 0) {
-					sb.append("Saved "+document.getNumberOfPages()+" pages from "+nrPDF+" files\n");
+					sb
+							.append("Saved ")
+							.append(document.getNumberOfPages())
+							.append(" pages from ")
+							.append(nrPDF)
+							.append(" files\n");
 					document.save(saveFile);
 				}
 				document.close();
@@ -75,7 +80,12 @@ public class PDFmerge {
 		for (PDPage page : pdf.getPages()) {
 			document.addPage(page);
 		}
-		sb.append("Added "+String.format("%3d", pdf.getNumberOfPages())+" pages from "+file.getName()+"\n");
+		sb
+				.append("Added ")
+				.append(String.format("%3d", pdf.getNumberOfPages()))
+				.append(" pages from ")
+				.append(file.getName())
+				.append("\n");
 		pdfFiles.add(pdf);
 	}
 
