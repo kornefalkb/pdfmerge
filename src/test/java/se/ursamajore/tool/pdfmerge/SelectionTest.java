@@ -1,13 +1,14 @@
 package se.ursamajore.tool.pdfmerge;
 
-import org.junit.Assert;
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
 
 import java.io.File;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class SelectionTest {
+
+class SelectionTest {
     @Test
     public void testSaveFile() {
         File saveFile = new File("c:/users/user/filename");
@@ -25,7 +26,7 @@ public class SelectionTest {
                 .append("user")
                 .append(separator)
                 .append("filename.pdf").toString();
-        Assert.assertEquals(expectedFileName, saveFile.getAbsolutePath());
+        assertEquals(expectedFileName, saveFile.getAbsolutePath());
     }
 
 }
